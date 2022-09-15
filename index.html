@@ -8,10 +8,10 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
             input#name:invalid:focus{
-                border: 1px solid red;
+                border: 1px solid rgb(11, 214, 35);
             }
             input#email:invalid:focus{
-                border: 1px solid red;
+                border: 1px solid rgb(28, 211, 28)
             }
 
             table {
@@ -23,18 +23,18 @@
             th, td {
                 text-align: left;
                 padding: 8px;
-                border: 1px solid black;
+                border: 1px solid rgb(221, 24, 24);
             }
   
             tr:nth-child(even) {
-                background-color: Lightgreen;
+                background-color: rgb(184, 187, 42);
             }
 
         </style>
     </head>
     <body>
-        <div class = "relative flex min-h-screen flex-col justify-center overflow-hidden py-6 bg-[#304ffe]">
-            <div class="relative bg-[#ea80fc] px-6 pt-5 pb-5 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
+        <div class = "relative flex min-h-screen flex-col justify-center overflow-hidden py-6 bg-[#29D3E6]">
+            <div class="relative bg-[#4B24B6] px-6 pt-5 pb-5 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
                 <div class="mx-auto max-w-md">
                     <h2 class="text-3xl text-center font-bold leading-tight">
                         Registration
@@ -98,8 +98,7 @@
         </div>
 
         <script>
-            let currentYear = new Date().getFullYear();
-            //email verification
+            let cYr = new Date().getFullYear();
             const email = document.getElementById('email');
             email.addEventListener('input', () => validate(email));
 
@@ -117,7 +116,7 @@
 
         let userForm = document.getElementById("user_form");
         
-        const retrieveEntries = () => {
+        const Reenter = () => {
             let entries = localStorage.getItem("user-entries");
             if(entries){
                 entries = JSON.parse(entries);
@@ -127,10 +126,10 @@
             return entries;
         }
 
-        let userEntries = retrieveEntries();
+        let userEntries = Reenter();
 
-        const displayEntries = () => {
-            const entries = retrieveEntries();
+        const entrshow = () => {
+            const entries = Reenter();
             const tableEntries = entries.map((entry) => {
                 const namecell = `<td class='border px-4 py-2'>${entry.name}</td>`;
                 const emailcell = `<td class='border px-4 py-2'>${entry.email}</td>`;
@@ -158,37 +157,37 @@
         }
 
 
-        const saveUserForm = (event) => {
+        const useerFrom = (event) => {
             event.preventDefault();
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-            const dob = document.getElementById("dob").value;
+            const nm = document.getElementById("name").value;
+            const em = document.getElementById("email").value;
+            const pass = document.getElementById("password").value;
+            const db = document.getElementById("date of birth").value;
 
             const acceptTerms = document.getElementById("acceptTerms").checked;
 
             const entry = {
-                name,
-                email,
-                password,
-                dob,
+                nm,
+                em,
+                pass,
+                db,
                 acceptTerms
             };
 
-            if((currentYear - dob.split("-")[0]) >= 18 && (currentYear - dob.split("-")[0]) <=55)
+            if((cYr - dob.split("-")[0]) >= 18 && (cYr - dob.split("-")[0]) <=55)
             {
                 userEntries.push(entry);
                 localStorage.setItem("user-entries", JSON.stringify(userEntries));
-                displayEntries();
+                entrshow();
                 location.reload();
             }
             else{
-                alert("Only 18 to 55 ages people can register in this page");
+                alert("Only 18 to 55 ages people allow to  register");
             }
 
         }
-        userForm.addEventListener("submit", saveUserForm);
-        displayEntries();
+        userForm.addEventListener("submit", useerFrom);
+        entrshow();
 
         </script>
 
